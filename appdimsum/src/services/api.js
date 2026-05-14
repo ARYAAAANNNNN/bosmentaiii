@@ -14,6 +14,9 @@
 // ================================================================
 
 let envUrl = import.meta.env.VITE_API_URL || 'https://bosmentai-production-1ca7.up.railway.app';
+if (envUrl && !envUrl.startsWith('http')) {
+  envUrl = 'https://' + envUrl;
+}
 if (envUrl.endsWith('/api')) envUrl = envUrl.slice(0, -4);
 if (envUrl.endsWith('/')) envUrl = envUrl.slice(0, -1);
 
