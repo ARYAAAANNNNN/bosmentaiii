@@ -13,8 +13,13 @@
 //   Atau gunakan: statsAPI.get() dari file ini
 // ================================================================
 
-const BASE_URL = (import.meta.env.VITE_API_URL || 'https://bosmentai-production-1ca7.up.railway.app') + '/api';
-export const STORAGE_URL = (import.meta.env.VITE_API_URL || 'https://bosmentai-production-1ca7.up.railway.app');
+let envUrl = import.meta.env.VITE_API_URL || 'https://bosmentai-production-1ca7.up.railway.app';
+// Mencegah double slash atau double /api
+if (envUrl.endsWith('/api')) envUrl = envUrl.slice(0, -4);
+if (envUrl.endsWith('/')) envUrl = envUrl.slice(0, -1);
+
+const BASE_URL = envUrl + '/api';
+export const STORAGE_URL = envUrl;
 const SUPABASE_STORAGE_URL = (import.meta.env.VITE_SUPABASE_URL || 'https://ydndrkxchypzaywhbywg.supabase.co') + '/storage/v1/object/public/menus/';
 
 export const getImageUrl = (path) => {
