@@ -1,0 +1,14 @@
+@media print {
+  .sidebar {
+    display: none !important;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 1in !important;
+  }
+  .main-content > div {
+    box-shadow: none !important;
+    background: white !important;
+  }
+}
