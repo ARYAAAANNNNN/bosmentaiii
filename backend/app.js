@@ -32,6 +32,8 @@ app.use(helmet({
 const allowedOrigins = [
   process.env.CORS_ORIGIN_ADMIN,
   process.env.CORS_ORIGIN_APP,
+  'https://bosmentai-user.vercel.app',
+  'https://bosmentai-admin-phi.vercel.app',
   'http://localhost:5173',
   'http://localhost:5174',
   'http://localhost:5175',
@@ -46,11 +48,12 @@ app.use(
         callback(null, true);
       } else {
         console.error(`[CORS Blocked] Origin: ${origin}`);
-        callback(null, false); // Ganti error dengan false agar browser yang menangani
+        callback(new Error('Not allowed by CORS'));
       }
     },
-    methods:     ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true,
   })
 );
 
